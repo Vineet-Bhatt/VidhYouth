@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFest Poster - Electrical Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold-light: #FFE566;
+    --gold: #F5C100;
+    --gold-dark: #E0A800;
+    --purple-light: #9B59B6;
+    --purple: #6B3FA0;
+    --purple-dark: #3D1D7A;
+    --white: #FFFDF0;
+  }
+
+  body {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .poster-wrap {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ====== POSTER 2 ====== */
+  .poster-2 {
+    width: 520px;
+    height: 740px;
+    background: var(--gold-light);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 44px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  .p2-bg-circle {
+    position: absolute;
+    bottom: -80px;
+    right: -80px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: var(--purple-dark);
+    z-index: 0;
+  }
+
+  .p2-bg-circle-2 {
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: var(--purple);
+    z-index: 0;
+  }
+
+  .p2-bg-circle-3 {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--gold);
+    z-index: 0;
+  }
+
+  .p2-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+
+  .p2-tag {
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--purple-dark);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .p2-wave {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .p2-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 110px;
+    line-height: 0.85;
+    color: var(--purple-dark);
+    letter-spacing: -2px;
+  }
+
+  .p2-title span {
+    color: var(--purple);
+    display: block;
+  }
+
+  .p2-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    color: rgba(107,63,160,0.12);
+    line-height: 1;
+    position: absolute;
+    bottom: 120px;
+    left: -10px;
+    z-index: 1;
+  }
+
+  .p2-tagline {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--purple);
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  .p2-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .p2-details .d-label {
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: var(--purple);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .p2-details .d-val {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--purple-dark);
+  }
+
+  .p2-logo-mark {
+    width: 56px;
+    height: 56px;
+  }
+
+  /* Animations */
+  @keyframes dash {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .circuit-path {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: dash 3s ease forwards;
+  }
+
+  .circuit-path-2 {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: dash 3s ease 0.5s forwards;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 1; r: 4; }
+    50% { opacity: 0.4; r: 6; }
+  }
+
+  .node { animation: glow-pulse 2s ease-in-out infinite; }
+  .node-2 { animation: glow-pulse 2s ease-in-out 0.5s infinite; }
+  .node-3 { animation: glow-pulse 2s ease-in-out 1s infinite; }
+
+  @keyframes wave-draw {
+    from { stroke-dashoffset: 1000; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .wave-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: wave-draw 2.5s ease forwards 0.3s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .poster-1 .p1-top, .poster-1 .p1-bottom {
+    animation: fadeUp 1s ease forwards;
+  }
+
+  .poster-2 .p2-content {
+    animation: fadeUp 1s ease 0.2s forwards;
+    opacity: 0;
+  }
+
+</style>
+</head>
+<body>
+<div class="poster-wrap">
+  <div class="poster-2">
+    <div class="p2-bg-circle"></div>
+    <div class="p2-bg-circle-2"></div>
+    <div class="p2-bg-circle-3"></div>
+
+    <div class="p2-year">26</div>
+
+    <div class="p2-content">
+      <div>
+        <div class="p2-tag">Annual Technical Fest &nbsp;·&nbsp; EE Dept.</div>
+
+        <!-- Sine Wave -->
+        <div class="p2-wave">
+          <svg width="100%" height="50" viewBox="0 0 440 50">
+            <path class="wave-path"
+              d="M0 25 C20 5, 40 5, 60 25 C80 45, 100 45, 120 25 C140 5, 160 5, 180 25 C200 45, 220 45, 240 25 C260 5, 280 5, 300 25 C320 45, 340 45, 360 25 C380 5, 400 5, 420 25 L440 25"
+              stroke="#6B3FA0" stroke-width="2.5" fill="none"/>
+            <text x="0" y="14" fill="#6B3FA0" font-size="8" font-family="Space Mono" opacity="0.6">V(t)</text>
+          </svg>
+        </div>
+
+        <div class="p2-title">VOLTA<span>SURGE</span></div>
+        <div class="p2-tagline">Engineer. Innovate. Electrify.</div>
+      </div>
+
+      <div class="p2-bottom">
+        <div>
+          <div class="p2-details">
+            <div class="d-label">Date</div>
+            <div class="d-val">15 March 2026</div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="p2-details">
+              <div class="d-label">Venue</div>
+              <div class="d-val">Main Auditorium</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EE Logo mark -->
+        <svg class="p2-logo-mark" viewBox="0 0 56 56" fill="none">
+          <rect width="56" height="56" rx="4" fill="#3D1D7A"/>
+          <text x="4" y="38" fill="#FFE566" font-size="26" font-family="Bebas Neue, sans-serif" letter-spacing="1">EE</text>
+          <line x1="4" y1="44" x2="52" y2="44" stroke="#F5C100" stroke-width="1.5"/>
+          <text x="4" y="53" fill="#9B59B6" font-size="7" font-family="Space Mono">DEPT.</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
