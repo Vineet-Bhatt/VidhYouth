@@ -3,264 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechFest Poster - Electrical Engineering</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;600;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --gold-light: #FFE566;
-    --gold: #F5C100;
-    --gold-dark: #E0A800;
-    --purple-light: #9B59B6;
-    --purple: #6B3FA0;
-    --purple-dark: #3D1D7A;
-    --white: #FFFDF0;
-  }
-
-  body {
-    background: #1a1a2e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 40px 20px;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .poster-wrap {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  /* ====== POSTER 2 ====== */
-  .poster-2 {
-    width: 520px;
-    height: 740px;
-    background: var(--gold-light);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    padding: 50px 44px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  }
-
-  .p2-bg-circle {
-    position: absolute;
-    bottom: -80px;
-    right: -80px;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    background: var(--purple-dark);
-    z-index: 0;
-  }
-
-  .p2-bg-circle-2 {
-    position: absolute;
-    bottom: -60px;
-    right: -60px;
-    width: 340px;
-    height: 340px;
-    border-radius: 50%;
-    background: var(--purple);
-    z-index: 0;
-  }
-
-  .p2-bg-circle-3 {
-    position: absolute;
-    bottom: -40px;
-    right: -40px;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: var(--gold);
-    z-index: 0;
-  }
-
-  .p2-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
-
-  .p2-tag {
-    font-size: 9px;
-    letter-spacing: 5px;
-    color: var(--purple-dark);
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-
-  .p2-wave {
-    width: 100%;
-    margin: 20px 0;
-  }
-
-  .p2-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 110px;
-    line-height: 0.85;
-    color: var(--purple-dark);
-    letter-spacing: -2px;
-  }
-
-  .p2-title span {
-    color: var(--purple);
-    display: block;
-  }
-
-  .p2-year {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 200px;
-    color: rgba(107,63,160,0.12);
-    line-height: 1;
-    position: absolute;
-    bottom: 120px;
-    left: -10px;
-    z-index: 1;
-  }
-
-  .p2-tagline {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 300;
-    font-size: 13px;
-    letter-spacing: 6px;
-    color: var(--purple);
-    text-transform: uppercase;
-    margin-top: 12px;
-  }
-
-  .p2-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .p2-details .d-label {
-    font-size: 8px;
-    letter-spacing: 3px;
-    color: var(--purple);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .p2-details .d-val {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--purple-dark);
-  }
-
-  .p2-logo-mark {
-    width: 56px;
-    height: 56px;
-  }
-
-  /* Animations */
-  @keyframes dash {
-    to { stroke-dashoffset: 0; }
-  }
-
-  .circuit-path {
-    stroke-dasharray: 600;
-    stroke-dashoffset: 600;
-    animation: dash 3s ease forwards;
-  }
-
-  .circuit-path-2 {
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-    animation: dash 3s ease 0.5s forwards;
-  }
-
-  @keyframes glow-pulse {
-    0%, 100% { opacity: 1; r: 4; }
-    50% { opacity: 0.4; r: 6; }
-  }
-
-  .node { animation: glow-pulse 2s ease-in-out infinite; }
-  .node-2 { animation: glow-pulse 2s ease-in-out 0.5s infinite; }
-  .node-3 { animation: glow-pulse 2s ease-in-out 1s infinite; }
-
-  @keyframes wave-draw {
-    from { stroke-dashoffset: 1000; }
-    to { stroke-dashoffset: 0; }
-  }
-
-  .wave-path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: wave-draw 2.5s ease forwards 0.3s;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .poster-1 .p1-top, .poster-1 .p1-bottom {
-    animation: fadeUp 1s ease forwards;
-  }
-
-  .poster-2 .p2-content {
-    animation: fadeUp 1s ease 0.2s forwards;
-    opacity: 0;
-  }
-
-</style>
+<title>VidhYouth 2026 — Feel The Surge!</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="poster-wrap">
-  <div class="poster-2">
-    <div class="p2-bg-circle"></div>
-    <div class="p2-bg-circle-2"></div>
-    <div class="p2-bg-circle-3"></div>
 
-    <div class="p2-year">26</div>
+<!-- Cursor dot -->
+<div class="cursor-dot" id="cursorDot"></div>
 
-    <div class="p2-content">
-      <div>
-        <div class="p2-tag">Annual Technical Fest &nbsp;·&nbsp; EE Dept.</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Vidh<span>Youth</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#venue">Venue</a></li>
+    <li><a href="#register">Register</a></li>
+  </ul>
+</nav>
 
-        <!-- Sine Wave -->
-        <div class="p2-wave">
-          <svg width="100%" height="50" viewBox="0 0 440 50">
-            <path class="wave-path"
-              d="M0 25 C20 5, 40 5, 60 25 C80 45, 100 45, 120 25 C140 5, 160 5, 180 25 C200 45, 220 45, 240 25 C260 5, 280 5, 300 25 C320 45, 340 45, 360 25 C380 5, 400 5, 420 25 L440 25"
-              stroke="#6B3FA0" stroke-width="2.5" fill="none"/>
-            <text x="0" y="14" fill="#6B3FA0" font-size="8" font-family="Space Mono" opacity="0.6">V(t)</text>
-          </svg>
-        </div>
+<!-- HERO -->
+<div id="hero">
+  <div class="grid-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-        <div class="p2-title">VOLTA<span>SURGE</span></div>
-        <div class="p2-tagline">Engineer. Innovate. Electrify.</div>
-      </div>
-
-      <div class="p2-bottom">
-        <div>
-          <div class="p2-details">
-            <div class="d-label">Date</div>
-            <div class="d-val">15 March 2026</div>
-          </div>
-          <div style="margin-top:12px">
-            <div class="p2-details">
-              <div class="d-label">Venue</div>
-              <div class="d-val">Main Auditorium</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- EE Logo mark -->
-        <svg class="p2-logo-mark" viewBox="0 0 56 56" fill="none">
-          <rect width="56" height="56" rx="4" fill="#3D1D7A"/>
-          <text x="4" y="38" fill="#FFE566" font-size="26" font-family="Bebas Neue, sans-serif" letter-spacing="1">EE</text>
-          <line x1="4" y1="44" x2="52" y2="44" stroke="#F5C100" stroke-width="1.5"/>
-          <text x="4" y="53" fill="#9B59B6" font-size="7" font-family="Space Mono">DEPT.</text>
-        </svg>
-      </div>
+  <div class="lightning-bg">
+    <div class="bolt">
+      <svg width="40" height="80" viewBox="0 0 40 80" fill="none">
+        <polygon points="22,0 8,45 20,45 18,80 32,35 19,35" fill="#ffd700"/>
+      </svg>
+    </div>
+    <div class="bolt">
+      <svg width="30" height="60" viewBox="0 0 30 60" fill="none">
+        <polygon points="16,0 6,34 15,34 14,60 24,26 14,26" fill="#ffd700"/>
+      </svg>
+    </div>
+    <div class="bolt">
+      <svg width="25" height="50" viewBox="0 0 25 50" fill="none">
+        <polygon points="13,0 5,28 12,28 11,50 20,22 12,22" fill="#ffd700"/>
+      </svg>
     </div>
   </div>
 
+  <div class="ees-badge">Electrical Engineering Society</div>
+  <div class="dept-tag">Electrical Engg. Department Presents</div>
+
+  <div class="hero-title">
+    <span class="title-vidh">
+      <span class="script-overlay">vidh</span>
+      VIDH
+    </span>
+    <span class="title-youth">
+      Y<span class="glow-o">O</span>UTH
+      <span class="script-under">youth</span>
+    </span>
+  </div>
+
+  <div class="tagline">Feel The Surge!</div>
+
+  <div class="date-box">Date: 24 — 25 — 26 March 2026</div>
+
+  <div class="cta-group">
+    <a href="#register" class="btn btn-primary">Register Now</a>
+    <a href="#events" class="btn btn-secondary">Explore Events</a>
+  </div>
+
+  <div class="scroll-hint">▼ &nbsp; Scroll Down &nbsp; ▼</div>
 </div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <section>
+    <div class="section-label">About The Fest</div>
+    <div class="section-title">What Is <span>VidhYouth?</span></div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>
+          <strong>VidhYouth</strong> is the annual technical and cultural extravaganza of the <strong>Electrical Engineering Department</strong>, Ujjain Engineering College.
+        </p>
+        <p>
+          Three electrifying days packed with competitions, expert talks, performances, and pure energy — where curious minds collide with creative souls.
+        </p>
+        <p>
+          Whether you're a tech wizard, a cultural maverick, or just here to feel the <strong>surge</strong> — VidhYouth has something that'll spark you.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Days of Surge</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Events</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Energy</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">1</div>
+          <div class="stat-label">College. One Vibe.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+</div>
+
+<!-- EVENTS -->
+<div class="section-wrap" id="events">
+  <section>
+    <div class="section-label">Events</div>
+    <div class="section-title">What's <span>Happening?</span></div>
+    <div class="events-grid">
+
+      <div class="event-card reveal">
+        <span class="event-icon">🎵</span>
+        <div class="event-name">Groovolt</div>
+        <div class="event-desc">Music meets voltage. Performances, jams, and a whole lot of groove. Let the sound surge through you.</div>
+        <span class="event-tag tag-culture">Cultural</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">🎮</span>
+        <div class="event-name">E-Sports</div>
+        <div class="event-desc">Pixel warriors unite. Battle your way through online gaming tournaments and claim the crown.</div>
+        <span class="event-tag tag-tech">Tech</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">♟️</span>
+        <div class="event-name">Chess</div>
+        <div class="event-desc">Strategy. Patience. Precision. Outsmart your opponents on the board in this classic clash of minds.</div>
+        <span class="event-tag tag-sport">Sport</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">🎬</span>
+        <div class="event-name">Bollywood Day</div>
+        <div class="event-desc">Dress up, dance, and dazzle. A full day dedicated to celebrating Bollywood's vibrant culture.</div>
+        <span class="event-tag tag-culture">Cultural</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">🎙️</span>
+        <div class="event-name">Expert Talk</div>
+        <div class="event-desc">Insights from industry veterans and academic experts. Get inspired, get charged, and get ahead.</div>
+        <span class="event-tag tag-tech">Tech</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">⚡</span>
+        <div class="event-name">Exhibition</div>
+        <div class="event-desc">Student innovations and projects on display. Witness the future of electrical engineering, live.</div>
+        <span class="event-tag tag-tech">Tech</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">🕹️</span>
+        <div class="event-name">Mini Games</div>
+        <div class="event-desc">Quick, fun, and wildly competitive mini-games for everyone. Bragging rights guaranteed.</div>
+        <span class="event-tag tag-sport">Sport</span>
+      </div>
+
+      <div class="event-card reveal">
+        <span class="event-icon">🎭</span>
+        <div class="event-name">Nukkad Act</div>
+        <div class="event-desc">Street theatre at its finest. Raw emotion, powerful stories, and performances that hit home.</div>
+        <span class="event-tag tag-culture">Cultural</span>
+      </div>
+
+    </div>
+  </section>
+  <div class="divider"></div>
+</div>
+
+<!-- SCHEDULE -->
+<div class="section-wrap" id="schedule">
+  <section>
+    <div class="section-label">Schedule</div>
+    <div class="section-title">3-Day <span>Timeline</span></div>
+
+    <div class="schedule-days">
+      <button class="day-tab active" onclick="showDay(0)">Day 1 — Mar 24</button>
+      <button class="day-tab" onclick="showDay(1)">Day 2 — Mar 25</button>
+      <button class="day-tab" onclick="showDay(2)">Day 3 — Mar 26</button>
+    </div>
+
+    <div class="schedule-content active" id="day0">
+      <div class="timeline">
+        <div class="tl-item reveal"><div class="tl-time">09:00 AM</div><div class="tl-name">Inauguration Ceremony</div><div class="tl-loc">Main Auditorium</div></div>
+        <div class="tl-item reveal"><div class="tl-time">10:30 AM</div><div class="tl-name">Expert Talk</div><div class="tl-loc">Seminar Hall</div></div>
+        <div class="tl-item reveal"><div class="tl-time">12:00 PM</div><div class="tl-name">Exhibition Launch</div><div class="tl-loc">Exhibition Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">02:00 PM</div><div class="tl-name">E-Sports Qualifiers</div><div class="tl-loc">Computer Lab</div></div>
+        <div class="tl-item reveal"><div class="tl-time">04:00 PM</div><div class="tl-name">Chess Tournament Round 1</div><div class="tl-loc">EE Dept Hall</div></div>
+        <div class="tl-item reveal"><div class="tl-time">06:00 PM</div><div class="tl-name">Groovolt — Opening Night</div><div class="tl-loc">Open Air Stage</div></div>
+      </div>
+    </div>
+
+    <div class="schedule-content" id="day1">
+      <div class="timeline">
+        <div class="tl-item reveal"><div class="tl-time">10:00 AM</div><div class="tl-name">Bollywood Day Begins</div><div class="tl-loc">Campus-wide</div></div>
+        <div class="tl-item reveal"><div class="tl-time">11:00 AM</div><div class="tl-name">Mini Games Marathon</div><div class="tl-loc">Sports Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">01:00 PM</div><div class="tl-name">E-Sports Finals</div><div class="tl-loc">Computer Lab</div></div>
+        <div class="tl-item reveal"><div class="tl-time">03:00 PM</div><div class="tl-name">Chess Semi-Finals</div><div class="tl-loc">EE Dept Hall</div></div>
+        <div class="tl-item reveal"><div class="tl-time">05:00 PM</div><div class="tl-name">Nukkad Act Performances</div><div class="tl-loc">Central Square</div></div>
+        <div class="tl-item reveal"><div class="tl-time">07:00 PM</div><div class="tl-name">Bollywood Night</div><div class="tl-loc">Open Air Stage</div></div>
+      </div>
+    </div>
+
+    <div class="schedule-content" id="day2">
+      <div class="timeline">
+        <div class="tl-item reveal"><div class="tl-time">10:00 AM</div><div class="tl-name">Chess Grand Finale</div><div class="tl-loc">EE Dept Hall</div></div>
+        <div class="tl-item reveal"><div class="tl-time">11:00 AM</div><div class="tl-name">Exhibition Finale & Judging</div><div class="tl-loc">Exhibition Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">01:00 PM</div><div class="tl-name">Mini Games Finals</div><div class="tl-loc">Sports Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">03:30 PM</div><div class="tl-name">Prize Distribution</div><div class="tl-loc">Main Auditorium</div></div>
+        <div class="tl-item reveal"><div class="tl-time">05:00 PM</div><div class="tl-name">Groovolt — Closing Night</div><div class="tl-loc">Open Air Stage</div></div>
+        <div class="tl-item reveal"><div class="tl-time">07:30 PM</div><div class="tl-name">Valedictory Ceremony</div><div class="tl-loc">Main Auditorium</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="divider"></div>
+</div>
+
+<!-- REGISTER -->
+<div class="register-section" id="register">
+  <h2>Feel The <span>Surge.</span></h2>
+  <p>Register now and be part of the electrifying experience</p>
+  <div class="cta-group" style="justify-content:center;opacity:1;animation:none;">
+    <a href="mailto:ees@uec.ac.in" class="btn btn-primary">Register Now</a>
+  </div>
+</div>
+
+<!-- VENUE -->
+<div class="section-wrap" id="venue">
+  <section>
+    <div class="section-label">Venue</div>
+    <div class="section-title">Find <span>Us Here</span></div>
+    <div class="venue-box reveal">
+      <div class="venue-name">Ujjain Engineering College</div>
+      <div class="venue-sub">Ujjain, Madhya Pradesh</div>
+      <div class="divider"></div>
+      <div class="contact-grid">
+        <div class="contact-item"><span>📞</span>+91 88394 89859</div>
+        <div class="contact-item"><span>📞</span>+91 92443 90408</div>
+        <div class="contact-item"><span>📞</span>+91 91659 31986</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VidhYouth</div>
+  <div class="footer-sub">Electrical Engineering Society · Ujjain Engineering College</div>
+  <div class="footer-copy">© 2026 EES UEC · All Rights Reserved · Feel The Surge</div>
+</footer>
+
+<script>
+  // Cursor dot
+  const dot = document.getElementById('cursorDot');
+  document.addEventListener('mousemove', e => {
+    dot.style.left = (e.clientX - 3) + 'px';
+    dot.style.top = (e.clientY - 3) + 'px';
+  });
+
+  // Day tabs
+  function showDay(idx) {
+    document.querySelectorAll('.schedule-content').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.day-tab').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+  }
+
+  // Intersection observer for reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Floating lightning bolts
+  function spawnBolt() {
+    const bolt = document.createElement('div');
+    bolt.className = 'float-bolt';
+    bolt.textContent = '⚡';
+    bolt.style.left = Math.random() * 100 + 'vw';
+    bolt.style.bottom = '0';
+    bolt.style.animationDuration = (3 + Math.random() * 3) + 's';
+    bolt.style.animationDelay = '0s';
+    bolt.style.fontSize = (1 + Math.random()) + 'rem';
+    document.body.appendChild(bolt);
+    setTimeout(() => bolt.remove(), 6000);
+  }
+
+  setInterval(spawnBolt, 2000);
+</script>
 </body>
 </html>

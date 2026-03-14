@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — VidhYouth 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+
+  /* ===== REGISTER PAGE SPECIFIC ===== */
+
+  .reg-hero {
+    min-height: 38vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 7rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .reg-hero .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(155,64,208,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155,64,208,0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+
+  .reg-hero .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .reg-hero .orb1 { width: 400px; height: 400px; background: rgba(74,26,122,0.4); top: -80px; left: -100px; }
+  .reg-hero .orb2 { width: 300px; height: 300px; background: rgba(232,98,26,0.15); bottom: 0; right: -80px; }
+
+  .reg-back {
+    position: absolute;
+    top: 5.5rem;
+    left: 2rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.2s;
+    z-index: 10;
+  }
+  .reg-back:hover { color: var(--yellow); }
+  .reg-back::before { content: '←'; font-size: 0.8rem; }
+
+  .reg-page-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    color: var(--purple-bright);
+    letter-spacing: 4px;
+    margin-bottom: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reg-page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    letter-spacing: 6px;
+    color: var(--white);
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reg-page-title span {
+    color: var(--yellow);
+    text-shadow: 0 0 30px rgba(245,197,24,0.5);
+  }
+
+  .reg-page-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 0.8rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== FILTER TABS ===== */
+  .filter-bar {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2rem 2rem 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .filter-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    padding: 0.6rem 1.2rem;
+    border: 2px solid rgba(155,64,208,0.4);
+    background: transparent;
+    color: var(--gray);
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--purple-bright);
+    color: var(--white);
+  }
+
+  .filter-btn.active {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    background: rgba(245,197,24,0.07);
+  }
+
+  /* ===== EVENTS GRID ===== */
+  .reg-grid-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .reg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  /* ===== EVENT REGISTRATION CARD ===== */
+  .reg-card {
+    position: relative;
+    border: 1px solid rgba(155,64,208,0.3);
+    background: rgba(26,10,46,0.7);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+    transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+    animation: cardFadeIn 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .reg-card:nth-child(1) { animation-delay: 0.05s; }
+  .reg-card:nth-child(2) { animation-delay: 0.12s; }
+  .reg-card:nth-child(3) { animation-delay: 0.19s; }
+  .reg-card:nth-child(4) { animation-delay: 0.26s; }
+  .reg-card:nth-child(5) { animation-delay: 0.33s; }
+  .reg-card:nth-child(6) { animation-delay: 0.40s; }
+  .reg-card:nth-child(7) { animation-delay: 0.47s; }
+  .reg-card:nth-child(8) { animation-delay: 0.54s; }
+
+  @keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reg-card.hidden {
+    display: none;
+  }
+
+  .reg-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--yellow);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.6), 0 0 24px rgba(245,197,24,0.12);
+  }
+
+  /* Accent top bar — colour per category */
+  .reg-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    transition: height 0.3s;
+  }
+
+  .reg-card[data-cat="technical"]::before  { background: linear-gradient(90deg, var(--purple-bright), #4af); }
+  .reg-card[data-cat="cultural"]::before   { background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+  .reg-card[data-cat="sports"]::before     { background: linear-gradient(90deg, #4af, #0cf); }
+
+  .reg-card:hover::before { height: 4px; }
+
+  /* Bottom-right pixel corner */
+  .reg-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 0 28px 28px;
+    border-color: transparent transparent rgba(245,197,24,0.15) transparent;
+    transition: border-color 0.3s;
+  }
+  .reg-card:hover::after { border-color: transparent transparent rgba(245,197,24,0.45) transparent; }
+
+  /* Card inner */
+  .card-header {
+    padding: 1.8rem 1.8rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .card-icon-wrap {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(155,64,208,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.3);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .reg-card:hover .card-icon-wrap {
+    transform: scale(1.1) rotate(4deg);
+    border-color: var(--yellow);
+  }
+
+  .card-meta { flex: 1; }
+
+  .card-category {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid;
+    display: inline-block;
+  }
+
+  .reg-card[data-cat="technical"]  .card-category { color: var(--purple-bright); border-color: var(--purple-bright); }
+  .reg-card[data-cat="cultural"]   .card-category { color: var(--yellow); border-color: var(--yellow); }
+  .reg-card[data-cat="sports"]     .card-category { color: #4af; border-color: #4af; }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: var(--white);
+    line-height: 1;
+    margin-top: 0.3rem;
+  }
+
+  .card-body {
+    padding: 1.2rem 1.8rem;
+  }
+
+  .card-desc {
+    font-size: 0.95rem;
+    color: rgba(240,238,255,0.65);
+    line-height: 1.65;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Info pills */
+  .card-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-pill {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--gray);
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(155,64,208,0.25);
+    padding: 0.25rem 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .info-pill .pill-icon { font-size: 0.85rem; }
+
+  /* Register button */
+  .card-footer {
+    padding: 0 1.8rem 1.8rem;
+  }
+
+  .reg-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .reg-card[data-cat="technical"] .reg-btn {
+    background: var(--purple-bright);
+    color: #fff;
+    box-shadow: 4px 4px 0 var(--purple);
+  }
+  .reg-card[data-cat="technical"] .reg-btn:hover {
+    background: #b055e8;
+    box-shadow: 6px 6px 0 var(--purple);
+    transform: translate(-2px, -2px);
+  }
+
+  .reg-card[data-cat="cultural"] .reg-btn {
+    background: var(--yellow);
+    color: #0a0612;
+    box-shadow: 4px 4px 0 var(--orange);
+  }
+  .reg-card[data-cat="cultural"] .reg-btn:hover {
+    background: #ffd700;
+    box-shadow: 6px 6px 0 var(--orange);
+    transform: translate(-2px, -2px);
+  }
+
+  .reg-card[data-cat="sports"] .reg-btn {
+    background: #4af;
+    color: #0a0612;
+    box-shadow: 4px 4px 0 #08a;
+  }
+  .reg-card[data-cat="sports"] .reg-btn:hover {
+    background: #5bf;
+    box-shadow: 6px 6px 0 #08a;
+    transform: translate(-2px, -2px);
+  }
+
+  .reg-btn:active { transform: translate(2px, 2px) !important; box-shadow: 1px 1px 0 !important; }
+
+  .btn-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+  .reg-btn:hover .btn-arrow { transform: translateX(4px); }
+
+  /* ===== MODAL OVERLAY ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,6,18,0.92);
+    backdrop-filter: blur(10px);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-box {
+    width: 100%;
+    max-width: 680px;
+    border: 1px solid rgba(155,64,208,0.5);
+    background: rgba(20,8,36,0.98);
+    position: relative;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.3s;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-overlay.open .modal-box {
+    transform: translateY(0) scale(1);
+  }
+
+  /* Corner brackets */
+  .modal-box::before, .modal-box::after {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    border: 2px solid var(--yellow);
+    pointer-events: none;
+  }
+  .modal-box::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .modal-box::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .modal-top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--purple-bright), var(--yellow), var(--orange));
+  }
+
+  .modal-header {
+    padding: 2rem 2rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .modal-title-wrap { flex: 1; }
+
+  .modal-event-icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
+
+  .modal-event-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .modal-close {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    background: transparent;
+    border: 2px solid rgba(155,64,208,0.4);
+    color: var(--gray);
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    transition: border-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+  .modal-close:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  .modal-body {
+    padding: 0 2rem 1.5rem;
+  }
+
+  .modal-desc {
+    font-size: 1.05rem;
+    color: rgba(240,238,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .detail-item {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(155,64,208,0.2);
+    padding: 1rem;
+  }
+
+  .detail-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.45rem;
+    color: var(--purple-bright);
+    letter-spacing: 2px;
+    margin-bottom: 0.4rem;
+  }
+
+  .detail-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+
+  .modal-note {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+    line-height: 1.8;
+    background: rgba(74,26,122,0.15);
+    border-left: 3px solid var(--purple-bright);
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-footer {
+    padding: 0 2rem 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .modal-reg-btn {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: var(--yellow);
+    color: #0a0612;
+    box-shadow: 5px 5px 0 var(--orange);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .modal-reg-btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--orange); }
+  .modal-reg-btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--orange); }
+
+  /* ===== PROGRESS INDICATOR ===== */
+  .reg-progress {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .progress-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    color: var(--gray);
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .progress-bar-outer {
+    height: 4px;
+    background: rgba(155,64,208,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar-inner {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--purple-bright), var(--yellow));
+    width: 0%;
+    transition: width 1s ease;
+    box-shadow: 0 0 8px var(--yellow);
+  }
+
+  /* ===== NOTICE BANNER ===== */
+  .notice-banner {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+  }
+
+  .notice-inner {
+    border: 1px solid rgba(245,197,24,0.3);
+    background: rgba(245,197,24,0.05);
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  .notice-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(240,238,255,0.75);
+    line-height: 1.6;
+    letter-spacing: 1px;
+  }
+
+  .notice-text strong { color: var(--yellow); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .reg-grid { grid-template-columns: 1fr; }
+    .modal-details { grid-template-columns: 1fr; }
+    .reg-page-title { font-size: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Vidh<span>Youth</span></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#events">Events</a></li>
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="index.html#venue">Venue</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="reg-hero">
+  <div class="grid-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <a href="index.html" class="reg-back">Back to Home</a>
+
+  <div class="reg-page-label">// VidhYouth 2026 · 24–26 March</div>
+  <h1 class="reg-page-title">Event <span>Registration</span></h1>
+  <p class="reg-page-sub">Select your event &amp; Fill the Google Form</p>
+</div>
+
+<!-- NOTICE BANNER -->
+<div class="notice-banner">
+  <div class="notice-inner">
+    <span class="notice-icon">⚡</span>
+    <div class="notice-text">
+      <strong>Note:</strong> Each event has its own registration form. Click "Register Now" on any event card to open the Google Form. Make sure to fill in correct details — registrations are final. For queries contact us at the numbers on the main page.
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Events</button>
+  <button class="filter-btn" data-filter="technical">Technical</button>
+  <button class="filter-btn" data-filter="cultural">Cultural</button>
+  <button class="filter-btn" data-filter="sports">Sports</button>
+</div>
+
+<!-- EVENTS GRID -->
+<div class="reg-grid-wrap">
+  <div class="reg-grid" id="regGrid">
+
+    <!-- EXHIBITION -->
+    <div class="reg-card" data-cat="technical" data-event="exhibition">
+      <div class="card-header">
+        <div class="card-icon-wrap">⚡</div>
+        <div class="card-meta">
+          <span class="card-category">Technical</span>
+          <div class="card-title">Exhibition</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Showcase your innovative projects and working models. Display your engineering solutions to judges and peers.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Team: 1–4 members</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 1 &amp; 2</span>
+          <span class="info-pill"><span class="pill-icon">🏆</span> Prizes worth ₹5000</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('exhibition')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PRESENTATION -->
+    <div class="reg-card" data-cat="technical" data-event="presentation">
+      <div class="card-header">
+        <div class="card-icon-wrap">🎙️</div>
+        <div class="card-meta">
+          <span class="card-category">Technical</span>
+          <div class="card-title">Presentation</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Present your technical paper or research idea in front of an expert panel. Sharpen your communication and analytical skills.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Team: 1–2 members</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 1</span>
+          <span class="info-pill"><span class="pill-icon">⏱️</span> 10 min slot</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('presentation')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- E-SPORTS -->
+    <div class="reg-card" data-cat="technical" data-event="esports">
+      <div class="card-header">
+        <div class="card-icon-wrap">🎮</div>
+        <div class="card-meta">
+          <span class="card-category">Technical</span>
+          <div class="card-title">E-Sports</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Battle it out in online gaming tournaments. Prove your reflexes, strategy, and teamwork in high-stakes matchups.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Solo / Duo</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 1 &amp; 2</span>
+          <span class="info-pill"><span class="pill-icon">🎮</span> BGMI / VALORANT</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('esports')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DANCE COMPETITION -->
+    <div class="reg-card" data-cat="cultural" data-event="dance">
+      <div class="card-header">
+        <div class="card-icon-wrap">💃</div>
+        <div class="card-meta">
+          <span class="card-category">Cultural</span>
+          <div class="card-title">Dance Competition</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Solo or group performances across any dance form — classical, contemporary, hip-hop, folk. Let your body do the talking.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Solo / Group (max 10)</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 2</span>
+          <span class="info-pill"><span class="pill-icon">⏱️</span> 5–8 min</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('dance')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DRAMA / NUKKAD ACT -->
+    <div class="reg-card" data-cat="cultural" data-event="drama">
+      <div class="card-header">
+        <div class="card-icon-wrap">🎭</div>
+        <div class="card-meta">
+          <span class="card-category">Cultural</span>
+          <div class="card-title">Drama / Nukkad Act</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Street plays and stage performances with powerful narratives. Bring your story to life and move the audience.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Team: 5–15 members</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 2</span>
+          <span class="info-pill"><span class="pill-icon">⏱️</span> Max 20 min</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('drama')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- GROOVOLT (MUSIC) -->
+    <div class="reg-card" data-cat="cultural" data-event="groovolt">
+      <div class="card-header">
+        <div class="card-icon-wrap">🎵</div>
+        <div class="card-meta">
+          <span class="card-category">Cultural</span>
+          <div class="card-title">Groovolt</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Music performances across any genre — vocals, instruments, fusion. Take the stage and feel the surge of the crowd.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Solo / Band</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 1 &amp; 3</span>
+          <span class="info-pill"><span class="pill-icon">⏱️</span> 5–10 min</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('groovolt')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CHESS -->
+    <div class="reg-card" data-cat="sports" data-event="chess">
+      <div class="card-header">
+        <div class="card-icon-wrap">♟️</div>
+        <div class="card-meta">
+          <span class="card-category">Sports</span>
+          <div class="card-title">Chess</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Classic game of strategy and intellect. Swiss-format tournament — think deeper, move smarter, win decisively.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👤</span> Individual</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 1–3</span>
+          <span class="info-pill"><span class="pill-icon">♟️</span> Swiss Format</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('chess')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MINI GAMES -->
+    <div class="reg-card" data-cat="sports" data-event="minigames">
+      <div class="card-header">
+        <div class="card-icon-wrap">🕹️</div>
+        <div class="card-meta">
+          <span class="card-category">Sports</span>
+          <div class="card-title">Mini Games</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">A mix of rapid-fire fun challenges, quirky contests, and laugh-out-loud activities. Quick reflexes, zero excuses.</p>
+        <div class="card-info">
+          <span class="info-pill"><span class="pill-icon">👥</span> Solo / Pair</span>
+          <span class="info-pill"><span class="pill-icon">📅</span> Day 2 &amp; 3</span>
+          <span class="info-pill"><span class="pill-icon">🎯</span> Multiple rounds</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="reg-btn" onclick="openModal('minigames')">
+          Register Now <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /.reg-grid -->
+</div><!-- /.reg-grid-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VidhYouth</div>
+  <div class="footer-sub">Electrical Engineering Society · Ujjain Engineering College</div>
+  <div class="footer-copy">© 2026 EES UEC · All Rights Reserved · Feel The Surge</div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-top-bar"></div>
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <span class="modal-event-icon" id="modalIcon"></span>
+        <div class="modal-event-name" id="modalName"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕ Close</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-note" id="modalNote"></div>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-reg-btn" id="modalFormBtn" href="#" target="_blank" rel="noopener">
+        ⚡ Open Google Form
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+// =============================================
+// EVENT DATA — Replace Google Form URLs below
+// =============================================
+const events = {
+  exhibition: {
+    icon: '⚡',
+    name: 'Exhibition',
+    desc: 'Showcase your innovative engineering projects and working models in front of judges, faculty, and fellow students. Both hardware and software projects are welcome. Bring your solution to a real-world problem and explain it with clarity.',
+    details: [
+      { label: 'Team Size',    value: '1 – 4 Members' },
+      { label: 'Event Days',   value: 'Day 1 & Day 2' },
+      { label: 'Venue',        value: 'Exhibition Ground' },
+      { label: 'Prize Pool',   value: '₹5,000' },
+    ],
+    note: 'Bring your own hardware/materials. Power outlets will be provided. Submit abstract at least 3 days before the event.',
+    formUrl: 'https://forms.gle/YOUR_EXHIBITION_FORM_ID',  // ← Replace with actual Google Form URL
+  },
+  presentation: {
+    icon: '🎙️',
+    name: 'Technical Presentation',
+    desc: 'Present your technical paper, research idea, or project concept before a panel of industry experts. Topics can be from any domain of Electrical Engineering. Judging is based on content, delivery, and Q&A performance.',
+    details: [
+      { label: 'Team Size',    value: '1 – 2 Members' },
+      { label: 'Event Day',    value: 'Day 1' },
+      { label: 'Slot Duration', value: '10 Minutes' },
+      { label: 'Venue',        value: 'Seminar Hall' },
+    ],
+    note: 'Submit your presentation (PPT/PDF) 24 hours before the event. No topic restrictions within EE domain.',
+    formUrl: 'https://forms.gle/YOUR_PRESENTATION_FORM_ID',  // ← Replace
+  },
+  esports: {
+    icon: '🎮',
+    name: 'E-Sports',
+    desc: 'Compete in high-energy online gaming tournaments. Games include BGMI (Battle Grounds Mobile India) and VALORANT. Form your squad, develop your strategy, and battle to the top of the leaderboard.',
+    details: [
+      { label: 'Team Size',    value: 'Solo or Duo' },
+      { label: 'Event Days',   value: 'Day 1 & Day 2' },
+      { label: 'Games',        value: 'BGMI / VALORANT' },
+      { label: 'Venue',        value: 'Computer Lab' },
+    ],
+    note: 'Bring your own device. Tournament brackets will be shared 1 day before. Report 30 mins before your scheduled time.',
+    formUrl: 'https://forms.gle/YOUR_ESPORTS_FORM_ID',  // ← Replace
+  },
+  dance: {
+    icon: '💃',
+    name: 'Dance Competition',
+    desc: 'Express yourself through movement. Any dance form is welcome — Bollywood, classical, contemporary, hip-hop, folk or fusion. Individual and group performances will be judged on choreography, expressions, synchrony, and energy.',
+    details: [
+      { label: 'Team Size',    value: 'Solo or Group (max 10)' },
+      { label: 'Event Day',    value: 'Day 2' },
+      { label: 'Duration',     value: '5 – 8 Minutes' },
+      { label: 'Venue',        value: 'Open Air Stage' },
+    ],
+    note: 'Submit your audio track (MP3) 2 days in advance. Costumes and props are encouraged. Vulgarity strictly not allowed.',
+    formUrl: 'https://forms.gle/YOUR_DANCE_FORM_ID',  // ← Replace
+  },
+  drama: {
+    icon: '🎭',
+    name: 'Drama / Nukkad Act',
+    desc: 'Stage plays and street performances that tell stories that matter. Use your script, dialogues, and body language to move the audience. Nukkad (street play) format or full stage drama — both are welcome.',
+    details: [
+      { label: 'Team Size',    value: '5 – 15 Members' },
+      { label: 'Event Day',    value: 'Day 2' },
+      { label: 'Duration',     value: 'Max 20 Minutes' },
+      { label: 'Venue',        value: 'Central Square / Auditorium' },
+    ],
+    note: 'Script submission is mandatory 3 days before. Props allowed. No loud music during street play unless pre-approved.',
+    formUrl: 'https://forms.gle/YOUR_DRAMA_FORM_ID',  // ← Replace
+  },
+  groovolt: {
+    icon: '🎵',
+    name: 'Groovolt — Music',
+    desc: 'Take the stage and perform your original or cover piece for a live audience. Vocals, instruments, DJ sets, or full bands — all are welcome at Groovolt. This is where music meets the surge.',
+    details: [
+      { label: 'Format',       value: 'Solo / Band' },
+      { label: 'Event Days',   value: 'Day 1 & Day 3' },
+      { label: 'Duration',     value: '5 – 10 Minutes' },
+      { label: 'Venue',        value: 'Open Air Stage' },
+    ],
+    note: 'Basic sound system provided. Bring your own instruments if needed. Submit track/backing track in MP3 format in advance.',
+    formUrl: 'https://forms.gle/YOUR_GROOVOLT_FORM_ID',  // ← Replace
+  },
+  chess: {
+    icon: '♟️',
+    name: 'Chess Tournament',
+    desc: 'Test your strategic mind in this Swiss-format chess tournament. Compete across multiple rounds to claim the crown. Open to all — beginners and experienced players alike.',
+    details: [
+      { label: 'Format',       value: 'Individual' },
+      { label: 'Event Days',   value: 'Day 1 through Day 3' },
+      { label: 'Format',       value: 'Swiss System' },
+      { label: 'Venue',        value: 'EE Dept Hall' },
+    ],
+    note: 'All rounds are timed (rapid chess). FIDE rules apply. Report 15 minutes before your round or forfeit.',
+    formUrl: 'https://forms.gle/YOUR_CHESS_FORM_ID',  // ← Replace
+  },
+  minigames: {
+    icon: '🕹️',
+    name: 'Mini Games',
+    desc: 'A series of fun and creative mini challenges that test quick thinking, speed, and creativity. Events change every round — expect the unexpected. Great energy, zero pressure.',
+    details: [
+      { label: 'Format',       value: 'Solo or Pair' },
+      { label: 'Event Days',   value: 'Day 2 & Day 3' },
+      { label: 'Rounds',       value: 'Multiple' },
+      { label: 'Venue',        value: 'Sports Ground' },
+    ],
+    note: 'Details of mini game activities will be revealed on the spot. Wear comfortable clothes. Participation certificate for all.',
+    formUrl: 'https://forms.gle/YOUR_MINIGAMES_FORM_ID',  // ← Replace
+  },
+};
+
+// =============================================
+// MODAL LOGIC
+// =============================================
+function openModal(eventKey) {
+  const e = events[eventKey];
+  if (!e) return;
+
+  document.getElementById('modalIcon').textContent = e.icon;
+  document.getElementById('modalName').textContent = e.name;
+  document.getElementById('modalDesc').textContent = e.desc;
+  document.getElementById('modalNote').textContent = '📌 ' + e.note;
+
+  const detailsEl = document.getElementById('modalDetails');
+  detailsEl.innerHTML = e.details.map(d => `
+    <div class="detail-item">
+      <div class="detail-label">${d.label}</div>
+      <div class="detail-value">${d.value}</div>
+    </div>
+  `).join('');
+
+  const btn = document.getElementById('modalFormBtn');
+  btn.href = e.formUrl;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// =============================================
+// FILTER LOGIC
+// =============================================
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.reg-card').forEach(card => {
+      if (filter === 'all' || card.dataset.cat === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
