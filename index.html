@@ -14,7 +14,10 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Vidh<span>Youth</span></div>
+  <a href="index.html"><div class="nav-logo">Vidh<span>Youth</span></div></a>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="hamburger"></span>
+  </button>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#events">Events</a></li>
@@ -23,6 +26,7 @@
     <li><a href="#register">Register</a></li>
   </ul>
 </nav>
+<div class="nav-overlay" aria-hidden="true"></div>
 
 <!-- HERO -->
 <div id="hero">
@@ -68,7 +72,7 @@
   <div class="date-box">Date: 24 — 25 — 26 March 2026</div>
 
   <div class="cta-group">
-    <a href="#register" class="btn btn-primary">Register Now</a>
+    <a href="register.html" class="btn btn-primary">Register Now</a>
     <a href="#events" class="btn btn-secondary">Explore Events</a>
   </div>
 
@@ -197,34 +201,33 @@
 
     <div class="schedule-content active" id="day0">
       <div class="timeline">
-        <div class="tl-item reveal"><div class="tl-time">09:00 AM</div><div class="tl-name">Inauguration Ceremony</div><div class="tl-loc">Main Auditorium</div></div>
-        <div class="tl-item reveal"><div class="tl-time">10:30 AM</div><div class="tl-name">Expert Talk</div><div class="tl-loc">Seminar Hall</div></div>
-        <div class="tl-item reveal"><div class="tl-time">12:00 PM</div><div class="tl-name">Exhibition Launch</div><div class="tl-loc">Exhibition Ground</div></div>
-        <div class="tl-item reveal"><div class="tl-time">02:00 PM</div><div class="tl-name">E-Sports Qualifiers</div><div class="tl-loc">Computer Lab</div></div>
-        <div class="tl-item reveal"><div class="tl-time">04:00 PM</div><div class="tl-name">Chess Tournament Round 1</div><div class="tl-loc">EE Dept Hall</div></div>
-        <div class="tl-item reveal"><div class="tl-time">06:00 PM</div><div class="tl-name">Groovolt — Opening Night</div><div class="tl-loc">Open Air Stage</div></div>
+        <div class="tl-item reveal"><div class="tl-time">10:00 AM</div><div class="tl-name">Inauguration Ceremony</div><div class="tl-loc">Pond Area</div></div>
+        <div class="tl-item reveal"><div class="tl-time">12:00 AM</div><div class="tl-name">Gully Cricket</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">02:00 PM</div><div class="tl-name">E-Sports Qualifiers</div><div class="tl-loc">1st Year building</div></div>
+        <div class="tl-item reveal"><div class="tl-time">04:00 PM</div><div class="tl-name">Chess Tournament Round 1</div><div class="tl-loc">EE Dept.</div></div>
       </div>
     </div>
 
     <div class="schedule-content" id="day1">
       <div class="timeline">
-        <div class="tl-item reveal"><div class="tl-time">10:00 AM</div><div class="tl-name">Bollywood Day Begins</div><div class="tl-loc">Campus-wide</div></div>
-        <div class="tl-item reveal"><div class="tl-time">11:00 AM</div><div class="tl-name">Mini Games Marathon</div><div class="tl-loc">Sports Ground</div></div>
-        <div class="tl-item reveal"><div class="tl-time">01:00 PM</div><div class="tl-name">E-Sports Finals</div><div class="tl-loc">Computer Lab</div></div>
-        <div class="tl-item reveal"><div class="tl-time">03:00 PM</div><div class="tl-name">Chess Semi-Finals</div><div class="tl-loc">EE Dept Hall</div></div>
-        <div class="tl-item reveal"><div class="tl-time">05:00 PM</div><div class="tl-name">Nukkad Act Performances</div><div class="tl-loc">Central Square</div></div>
-        <div class="tl-item reveal"><div class="tl-time">07:00 PM</div><div class="tl-name">Bollywood Night</div><div class="tl-loc">Open Air Stage</div></div>
+        <div class="tl-item reveal"><div class="tl-time">10:30 AM</div><div class="tl-name">Treasure Hunt</div><div class="tl-loc">Campus-wide</div></div>
+        <div class="tl-item reveal"><div class="tl-time">01:00 PM</div><div class="tl-name">Expert Talk</div><div class="tl-loc">Auditorium</div></div>
+        <div class="tl-item reveal"><div class="tl-time">02:00 PM</div><div class="tl-name">Presentation</div><div class="tl-loc">Auditorium</div></div>
+        <div class="tl-item reveal"><div class="tl-time">02:00 PM</div><div class="tl-name">Quiz</div><div class="tl-loc">G-17</div></div>
+        <div class="tl-item reveal"><div class="tl-time">03:00 PM</div><div class="tl-name">Exhibition</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">03:30 PM</div><div class="tl-name">Esports</div><div class="tl-loc">New Building</div></div>
+        <div class="tl-item reveal"><div class="tl-time">04:00 PM</div><div class="tl-name">Chess</div><div class="tl-loc">EE Dept.</div></div>
       </div>
     </div>
 
     <div class="schedule-content" id="day2">
       <div class="timeline">
-        <div class="tl-item reveal"><div class="tl-time">10:00 AM</div><div class="tl-name">Chess Grand Finale</div><div class="tl-loc">EE Dept Hall</div></div>
-        <div class="tl-item reveal"><div class="tl-time">11:00 AM</div><div class="tl-name">Exhibition Finale & Judging</div><div class="tl-loc">Exhibition Ground</div></div>
-        <div class="tl-item reveal"><div class="tl-time">01:00 PM</div><div class="tl-name">Mini Games Finals</div><div class="tl-loc">Sports Ground</div></div>
-        <div class="tl-item reveal"><div class="tl-time">03:30 PM</div><div class="tl-name">Prize Distribution</div><div class="tl-loc">Main Auditorium</div></div>
-        <div class="tl-item reveal"><div class="tl-time">05:00 PM</div><div class="tl-name">Groovolt — Closing Night</div><div class="tl-loc">Open Air Stage</div></div>
-        <div class="tl-item reveal"><div class="tl-time">07:30 PM</div><div class="tl-name">Valedictory Ceremony</div><div class="tl-loc">Main Auditorium</div></div>
+        <div class="tl-item reveal"><div class="tl-time">10:00 AM</div><div class="tl-name">Bollywood Ramp</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">11:00 AM</div><div class="tl-name">Drama</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">01:00 PM</div><div class="tl-name">Open Mic</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">03:30 PM</div><div class="tl-name">Dumb Charades</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">05:00 PM</div><div class="tl-name">Dance Competition</div><div class="tl-loc">Mechanical Ground</div></div>
+        <div class="tl-item reveal"><div class="tl-time">07:30 PM</div><div class="tl-name">Groovolt — Closing Night</div><div class="tl-loc">Mechanical Ground</div></div>
       </div>
     </div>
   </section>
@@ -236,7 +239,7 @@
   <h2>Feel The <span>Surge.</span></h2>
   <p>Register now and be part of the electrifying experience</p>
   <div class="cta-group" style="justify-content:center;opacity:1;animation:none;">
-    <a href="mailto:ees@uec.ac.in" class="btn btn-primary">Register Now</a>
+    <a href="register.html" class="btn btn-primary">Register Now</a>
   </div>
 </div>
 
@@ -310,6 +313,22 @@
   }
 
   setInterval(spawnBolt, 2000);
+
+  // Mobile nav toggle
+  const nav = document.querySelector('nav');
+  const navToggle = document.querySelector('.nav-toggle');
+  const navOverlay = document.querySelector('.nav-overlay');
+
+  function setNavOpen(isOpen) {
+    nav.classList.toggle('open', isOpen);
+    navToggle?.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  }
+
+  navToggle?.addEventListener('click', () => setNavOpen(!nav.classList.contains('open')));
+  navOverlay?.addEventListener('click', () => setNavOpen(false));
+  document.querySelectorAll('nav ul a').forEach(link => {
+    link.addEventListener('click', () => setNavOpen(false));
+  });
 </script>
 </body>
 </html>

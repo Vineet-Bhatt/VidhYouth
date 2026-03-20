@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Sports — VidhYouth 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;600;700&family=Bebas+Neue&family=Orbitron:wght@700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --bgmi:   #f5a623;   /* BGMI — amber/gold */
+  --bgmi-d: #b8700f;
+  --ff:     #ff3b3b;   /* Free Fire — hot red */
+  --ff-d:   #9a1010;
+  --codm:   #00e5ff;   /* CODM — electric cyan */
+  --codm-d: #006a7a;
+}
+
+/* ===== HERO ===== */
+.es-hero {
+  min-height: 46vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+}
+
+.es-hero .grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(155,64,208,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155,64,208,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Diagonal scan line sweeping effect */
+.es-hero .scan-sweep {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(155,64,208,0.04) 50%,
+    transparent 60%
+  );
+  animation: scanSweep 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.es-hero .orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); pointer-events: none;
+  animation: floatOrb 9s ease-in-out infinite;
+}
+.es-hero .orb1 { width: 450px; height: 450px; background: rgba(74,26,122,0.45); top:-80px; left:-120px; }
+.es-hero .orb2 { width: 300px; height: 300px; background: rgba(245,166,35,0.12); bottom:-40px; right:-60px; animation-delay:3s; }
+.es-hero .orb3 { width: 250px; height: 250px; background: rgba(255,59,59,0.1); top:30%; right:10%; animation-delay:6s; }
+
+.es-back {
+  position: absolute; top: 5.5rem; left: 2rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem; color: var(--gray);
+  text-decoration: none; letter-spacing: 2px;
+  display: flex; align-items: center; gap: 0.6rem;
+  transition: color 0.2s; z-index: 10;
+}
+.es-back:hover { color: var(--yellow); }
+.es-back::before { content: '←'; font-size: 0.8rem; }
+
+.es-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem; color: var(--purple-bright);
+  letter-spacing: 4px; margin-bottom: 0.8rem;
+  position: relative; z-index: 1;
+  animation: fadeInDown 0.8s ease forwards; opacity: 0;
+}
+
+.es-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: var(--white);
+  line-height: 1;
+  position: relative; z-index: 1;
+  text-shadow:
+    0 0 40px rgba(155,64,208,0.5),
+    3px 3px 0 rgba(74,26,122,0.8);
+  animation: fadeInUp 0.9s 0.1s ease forwards; opacity: 0;
+}
+
+.es-title .highlight {
+  color: var(--yellow);
+  text-shadow: 0 0 30px rgba(245,197,24,0.6), 3px 3px 0 var(--orange);
+}
+
+.es-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--gray); letter-spacing: 4px;
+  text-transform: uppercase; margin-top: 1rem;
+  position: relative; z-index: 1;
+  animation: fadeInUp 0.9s 0.25s ease forwards; opacity: 0;
+}
+
+/* Date + venue pills */
+.es-pills {
+  display: flex; gap: 1rem; justify-content: center;
+  flex-wrap: wrap; margin-top: 1.5rem;
+  position: relative; z-index: 1;
+  animation: fadeInUp 0.9s 0.4s ease forwards; opacity: 0;
+}
+
+.es-pill {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem; letter-spacing: 1px;
+  border: 1px solid rgba(155,64,208,0.5);
+  padding: 0.5rem 1rem; color: var(--white);
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+/* ===== SECTION HEADER (reuse but local) ===== */
+.es-section-head {
+  text-align: center; padding: 4rem 2rem 0;
+}
+
+.es-section-head .section-label {
+  justify-content: center;
+}
+
+/* ===== GAME CARDS ===== */
+.games-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+  display: flex; flex-direction: column; gap: 5rem;
+}
+
+/* Each game is a full-width dramatic panel */
+.game-panel {
+  position: relative;
+  border: 1px solid rgba(155,64,208,0.25);
+  background: rgba(13,8,24,0.8);
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease forwards; opacity: 0;
+}
+
+.game-panel:nth-child(1) { animation-delay: 0.1s; }
+.game-panel:nth-child(2) { animation-delay: 0.25s; }
+.game-panel:nth-child(3) { animation-delay: 0.4s; }
+
+/* Thick accent left border per game */
+.game-panel.bgmi  { border-left: 4px solid var(--bgmi); }
+.game-panel.ff    { border-left: 4px solid var(--ff); }
+.game-panel.codm  { border-left: 4px solid var(--codm); }
+
+/* Glow tint overlay */
+.game-panel.bgmi::before  { background: radial-gradient(ellipse at 0% 50%, rgba(245,166,35,0.08) 0%, transparent 60%); }
+.game-panel.ff::before    { background: radial-gradient(ellipse at 0% 50%, rgba(255,59,59,0.08) 0%, transparent 60%); }
+.game-panel.codm::before  { background: radial-gradient(ellipse at 0% 50%, rgba(0,229,255,0.07) 0%, transparent 60%); }
+
+.game-panel::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+}
+
+/* Bottom-right pixel corner */
+.game-panel::after {
+  content: ''; position: absolute; bottom: 0; right: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 0 40px 40px;
+}
+.game-panel.bgmi::after  { border-color: transparent transparent rgba(245,166,35,0.2) transparent; }
+.game-panel.ff::after    { border-color: transparent transparent rgba(255,59,59,0.2) transparent; }
+.game-panel.codm::after  { border-color: transparent transparent rgba(0,229,255,0.2) transparent; }
+
+/* Top accent bar */
+.game-topbar {
+  height: 3px; width: 100%;
+}
+.bgmi  .game-topbar { background: linear-gradient(90deg, var(--bgmi), transparent); }
+.ff    .game-topbar { background: linear-gradient(90deg, var(--ff), transparent); }
+.codm  .game-topbar { background: linear-gradient(90deg, var(--codm), transparent); }
+
+/* Inner layout */
+.game-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+/* Left: info */
+.game-info {
+  padding: 2.5rem 3rem 2.5rem 2.5rem;
+  border-right: 1px solid rgba(155,64,208,0.15);
+  position: relative;
+}
+
+/* Game number watermark */
+.game-number {
+  position: absolute; top: 1rem; right: 1.5rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 5rem; font-weight: 900;
+  opacity: 0.04; line-height: 1;
+  pointer-events: none; user-select: none;
+}
+.bgmi  .game-number { color: var(--bgmi); }
+.ff    .game-number { color: var(--ff); }
+.codm  .game-number { color: var(--codm); }
+
+.game-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem; letter-spacing: 3px;
+  padding: 0.3rem 0.8rem; border: 1px solid;
+  display: inline-block; margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.bgmi  .game-badge { color: var(--bgmi);  border-color: var(--bgmi); }
+.ff    .game-badge { color: var(--ff);    border-color: var(--ff); }
+.codm  .game-badge { color: var(--codm);  border-color: var(--codm); }
+
+.game-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; letter-spacing: 3px;
+  color: var(--white); line-height: 1.05;
+  margin-bottom: 0.3rem;
+}
+
+.bgmi  .game-name { text-shadow: 0 0 20px rgba(245,166,35,0.4); }
+.ff    .game-name { text-shadow: 0 0 20px rgba(255,59,59,0.4); }
+.codm  .game-name { text-shadow: 0 0 20px rgba(0,229,255,0.4); }
+
+.game-fullname {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.bgmi  .game-fullname { color: rgba(245,166,35,0.6); }
+.ff    .game-fullname { color: rgba(255,59,59,0.6); }
+.codm  .game-fullname { color: rgba(0,229,255,0.6); }
+
+.game-desc {
+  font-size: 1rem; color: rgba(240,238,255,0.65);
+  line-height: 1.7; margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+/* Stat row */
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(155,64,208,0.2);
+  margin-bottom: 2rem;
+}
+
+.game-stat {
+  padding: 0.9rem 0.8rem;
+  border-right: 1px solid rgba(155,64,208,0.2);
+  text-align: center;
+}
+.game-stat:last-child { border-right: none; }
+
+.stat-val {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700; font-size: 1.3rem;
+  line-height: 1; margin-bottom: 0.3rem;
+}
+.bgmi  .stat-val { color: var(--bgmi); }
+.ff    .stat-val { color: var(--ff); }
+.codm  .stat-val { color: var(--codm); }
+
+.stat-key {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 2px; color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* Register CTA */
+.game-cta {
+  display: inline-flex;
+  align-items: center; gap: 1rem;
+  padding: 1rem 2rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 2px; text-decoration: none;
+  text-transform: uppercase; cursor: pointer;
+  border: none; transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.bgmi  .game-cta { background: var(--bgmi);  color: #0a0612; box-shadow: 5px 5px 0 var(--bgmi-d); }
+.ff    .game-cta { background: var(--ff);    color: #fff;    box-shadow: 5px 5px 0 var(--ff-d); }
+.codm  .game-cta { background: var(--codm);  color: #0a0612; box-shadow: 5px 5px 0 var(--codm-d); }
+
+.game-cta:hover { transform: translate(-3px,-3px); }
+.bgmi  .game-cta:hover { box-shadow: 8px 8px 0 var(--bgmi-d); }
+.ff    .game-cta:hover { box-shadow: 8px 8px 0 var(--ff-d); }
+.codm  .game-cta:hover { box-shadow: 8px 8px 0 var(--codm-d); }
+.game-cta:active { transform: translate(2px,2px); box-shadow: 2px 2px 0; }
+
+.cta-arrow { font-size: 1.1rem; transition: transform 0.2s; }
+.game-cta:hover .cta-arrow { transform: translateX(4px); }
+
+/* Right: rules / format panel */
+.game-rules {
+  padding: 2.5rem;
+  background: rgba(0,0,0,0.2);
+}
+
+.rules-heading {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem; letter-spacing: 3px;
+  color: var(--purple-bright); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.rules-heading::before { content: '//'; color: var(--yellow); }
+
+.rules-list {
+  list-style: none; display: flex;
+  flex-direction: column; gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.rules-list li {
+  font-size: 0.95rem; color: rgba(240,238,255,0.7);
+  line-height: 1.6; padding-left: 1.4rem;
+  position: relative; font-weight: 400;
+}
+
+.rules-list li::before {
+  content: '▸';
+  position: absolute; left: 0;
+  font-size: 0.8rem;
+}
+.bgmi  .rules-list li::before { color: var(--bgmi); }
+.ff    .rules-list li::before { color: var(--ff); }
+.codm  .rules-list li::before { color: var(--codm); }
+
+/* Bracket / schedule mini-table */
+.bracket-box {
+  border: 1px solid rgba(155,64,208,0.25);
+  background: rgba(0,0,0,0.3);
+  margin-bottom: 1.5rem;
+}
+
+.bracket-header {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(155,64,208,0.2);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem; letter-spacing: 2px;
+  color: var(--white);
+}
+.bgmi  .bracket-header { background: rgba(245,166,35,0.1); }
+.ff    .bracket-header { background: rgba(255,59,59,0.1); }
+.codm  .bracket-header { background: rgba(0,229,255,0.1); }
+
+.bracket-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(155,64,208,0.1);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem; font-weight: 600;
+  color: rgba(240,238,255,0.75); letter-spacing: 1px;
+}
+.bracket-row:last-child { border-bottom: none; }
+
+.bracket-row span:first-child { color: var(--gray); font-size: 0.75rem; }
+
+.prize-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; border: 1px solid rgba(155,64,208,0.25);
+  background: rgba(155,64,208,0.1);
+}
+
+.prize-cell {
+  background: rgba(13,8,24,0.9);
+  padding: 1rem; text-align: center;
+}
+
+.prize-rank {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 2px; color: var(--gray);
+  text-transform: uppercase; margin-bottom: 0.4rem;
+}
+
+.prize-medal { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+
+.prize-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem; letter-spacing: 2px;
+}
+.bgmi  .prize-amount { color: var(--bgmi); }
+.ff    .prize-amount { color: var(--ff); }
+.codm  .prize-amount { color: var(--codm); }
+
+/* ===== GENERAL RULES SECTION ===== */
+.general-section {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+.general-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.general-card {
+  border: 1px solid rgba(155,64,208,0.25);
+  background: rgba(26,10,46,0.5);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.general-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--purple-bright), var(--yellow));
+}
+
+.general-card:hover { border-color: rgba(155,64,208,0.6); }
+
+.gen-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+
+.gen-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem; color: var(--yellow);
+  letter-spacing: 1px; margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.gen-text {
+  font-size: 0.9rem; color: rgba(240,238,255,0.65);
+  line-height: 1.65; font-weight: 400;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 860px) {
+  .game-inner {
+    grid-template-columns: 1fr;
+  }
+  .game-info {
+    border-right: none;
+    border-bottom: 1px solid rgba(155,64,208,0.15);
+    padding: 2rem 1.5rem;
+  }
+  .game-rules { padding: 2rem 1.5rem; }
+  .game-stats { grid-template-columns: repeat(3,1fr); }
+}
+
+@media (max-width: 500px) {
+  .es-title { font-size: 2.2rem; }
+  .game-name { font-size: 1.8rem; }
+  .game-stats { grid-template-columns: 1fr 1fr; }
+  .game-stats .game-stat:last-child { border-top: 1px solid rgba(155,64,208,0.2); }
+  .prize-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html"><div class="nav-logo">Vidh<span>Youth</span></div></a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="register.html">Register</a></li>
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="index.html#venue">Venue</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="es-hero">
+  <div class="grid-bg"></div>
+  <div class="scan-sweep"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <a href="register.html" class="es-back">Back to Register</a>
+
+  <div class="es-label">// VidhYouth 2026 · E-Sports Arena</div>
+  <h1 class="es-title">E-<span class="highlight">SPORTS</span></h1>
+  <p class="es-sub">Compete · Dominate · Claim the Crown</p>
+
+  <div class="es-pills">
+    <span class="es-pill">📅 Day 1 &amp; Day 2</span>
+    <span class="es-pill">💻 Computer Lab · UEC</span>
+    <span class="es-pill">🏆 3 Titles · 3 Champions</span>
+    <span class="es-pill">🎮 Mobile Gaming</span>
+  </div>
+</div>
+
+<div class="divider" style="max-width:1200px;margin:0 auto 0;padding:0 2rem;"></div>
+
+<!-- SECTION HEADING -->
+<div class="es-section-head">
+  <div class="section-label" style="justify-content:center;">Game Titles</div>
+  <div class="section-title" style="margin-bottom:0;">Choose Your <span>Battlefield</span></div>
+</div>
+
+<!-- ===== GAMES ===== -->
+<div class="games-wrap">
+
+  <!-- ======== BGMI ======== -->
+  <div class="game-panel bgmi reveal">
+    <div class="game-topbar"></div>
+    <div class="game-inner">
+
+      <!-- INFO -->
+      <div class="game-info">
+        <div class="game-number">01</div>
+        <span class="game-badge">Battle Royale</span>
+        <div class="game-name">BGMI</div>
+        <div class="game-fullname">Battlegrounds Mobile India</div>
+        <p class="game-desc">
+          Drop into Erangel, loot fast, and be the last squad standing. This is squad-based survival at its most intense. Form your 4-man team, communicate ruthlessly, and outlive every enemy on the map.
+        </p>
+
+        <div class="game-stats">
+          <div class="game-stat">
+            <div class="stat-val">4v4</div>
+            <div class="stat-key">Squad</div>
+          </div>
+          <div class="game-stat">
+            <div class="stat-val">8</div>
+            <div class="stat-key">Max Teams</div>
+          </div>
+          <div class="game-stat">
+            <div class="stat-val">3</div>
+            <div class="stat-key">Matches</div>
+          </div>
+        </div>
+
+        <a href="https://forms.gle/QC4cLJmsxSoJwzcj9" target="_blank" rel="noopener" class="game-cta">
+          Register Squad <span class="cta-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- RULES -->
+      <div class="game-rules">
+        <div class="rules-heading">Tournament Format</div>
+
+        <div class="bracket-box">
+          <div class="bracket-header">📋 SCHEDULE</div>
+          <div class="bracket-row">
+            <span>DAY 1</span>
+            <span>10:00 AM</span>
+            <span>Qualifiers</span>
+          </div>
+          <div class="bracket-row">
+            <span>DAY 1</span>
+            <span>02:00 PM</span>
+            <span>Semi-Finals</span>
+          </div>
+          <div class="bracket-row">
+            <span>DAY 2</span>
+            <span>11:00 AM</span>
+            <span>Grand Finals</span>
+          </div>
+        </div>
+
+        <div class="rules-heading">Rules &amp; Info</div>
+        <ul class="rules-list">
+          <li>Team of exactly 4 players. All must be from the same college.</li>
+          <li>Map: Erangel (Classic mode). Custom room provided by organizers.</li>
+          <li>Final score = Placement points + Kill points (standard BGMI formula).</li>
+          <li>Emulators are strictly NOT allowed — mobile devices only.</li>
+          <li>Team must report 15 minutes before match start. Late = disqualification.</li>
+          <li>Any use of hacks, mods, or exploits results in immediate ban.</li>
+        </ul>
+
+        <div class="prize-row">
+          <div class="prize-cell">
+            <div class="prize-rank">1st Place</div>
+            <span class="prize-medal">🥇</span>
+            <div class="prize-amount">₹3000</div>
+          </div>
+          <div class="prize-cell">
+            <div class="prize-rank">2nd Place</div>
+            <span class="prize-medal">🥈</span>
+            <div class="prize-amount">₹1500</div>
+          </div>
+          <div class="prize-cell">
+            <div class="prize-rank">3rd Place</div>
+            <span class="prize-medal">🥉</span>
+            <div class="prize-amount">₹500</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /.game-panel.bgmi -->
+
+
+  <!-- ======== FREE FIRE ======== -->
+  <div class="game-panel ff reveal">
+    <div class="game-topbar"></div>
+    <div class="game-inner">
+
+      <!-- INFO -->
+      <div class="game-info">
+        <div class="game-number">02</div>
+        <span class="game-badge">Battle Royale</span>
+        <div class="game-name">FREE FIRE</div>
+        <div class="game-fullname">Garena Free Fire MAX</div>
+        <p class="game-desc">
+          Fast-paced, 50-player chaos packed into a shrinking island. Pick your character, grab your gloo walls, and outlast everyone else. Free Fire rewards aggression, speed, and clutch plays under pressure.
+        </p>
+
+        <div class="game-stats">
+          <div class="game-stat">
+            <div class="stat-val">4v4</div>
+            <div class="stat-key">Squad</div>
+          </div>
+          <div class="game-stat">
+            <div class="stat-val">6</div>
+            <div class="stat-key">Max Teams</div>
+          </div>
+          <div class="game-stat">
+            <div class="stat-val">3</div>
+            <div class="stat-key">Matches</div>
+          </div>
+        </div>
+
+        <a href="https://forms.gle/5pXeX5rQ9CpRcQwr8" target="_blank" rel="noopener" class="game-cta">
+          Register Squad <span class="cta-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- RULES -->
+      <div class="game-rules">
+        <div class="rules-heading">Tournament Format</div>
+
+        <div class="bracket-box">
+          <div class="bracket-header">📋 SCHEDULE</div>
+          <div class="bracket-row">
+            <span>DAY 1</span>
+            <span>12:00 PM</span>
+            <span>Qualifiers</span>
+          </div>
+          <div class="bracket-row">
+            <span>DAY 1</span>
+            <span>04:00 PM</span>
+            <span>Semi-Finals</span>
+          </div>
+          <div class="bracket-row">
+            <span>DAY 2</span>
+            <span>01:00 PM</span>
+            <span>Grand Finals</span>
+          </div>
+        </div>
+
+        <div class="rules-heading">Rules &amp; Info</div>
+        <ul class="rules-list">
+          <li>Team of 4. All members must be from the same college/institution.</li>
+          <li>Custom room hosted by organizers — Bermuda map, BR Ranked rules.</li>
+          <li>Scoring: Placement points + Kill points (official FF scoring system).</li>
+          <li>OB-patched/modified APKs are strictly prohibited.</li>
+          <li>Character skills allowed. Pet skills allowed as per official rules.</li>
+          <li>No VPN usage during match. Disconnects will not be replayed.</li>
+        </ul>
+
+        <div class="prize-row">
+          <div class="prize-cell">
+            <div class="prize-rank">1st Place</div>
+            <span class="prize-medal">🥇</span>
+            <div class="prize-amount">₹2500</div>
+          </div>
+          <div class="prize-cell">
+            <div class="prize-rank">2nd Place</div>
+            <span class="prize-medal">🥈</span>
+            <div class="prize-amount">₹1000</div>
+          </div>
+          <div class="prize-cell">
+            <div class="prize-rank">3rd Place</div>
+            <span class="prize-medal">🥉</span>
+            <div class="prize-amount">₹500</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /.game-panel.ff -->
+
+
+  <!-- ======== CODM ======== -->
+  <div class="game-panel codm reveal">
+    <div class="game-topbar"></div>
+    <div class="game-inner">
+
+      <!-- INFO -->
+      <div class="game-info">
+        <div class="game-number">03</div>
+        <span class="game-badge">FPS · Multiplayer</span>
+        <div class="game-name">CODM</div>
+        <div class="game-fullname">Call of Duty: Mobile</div>
+        <p class="game-desc">
+          Tactical 5v5 warfare on iconic maps. Choose your loadout, execute your strategy, and wipe out the enemy team. CODM is where gunplay, teamwork, and split-second decisions separate legends from the rest.
+        </p>
+
+        <div class="game-stats">
+          <div class="game-stat">
+            <div class="stat-val">5v5</div>
+            <div class="stat-key">Team</div>
+          </div>
+          <div class="game-stat">
+            <div class="stat-val">8</div>
+            <div class="stat-key">Max Teams</div>
+          </div>
+          <div class="game-stat">
+            <div class="stat-val">BO3</div>
+            <div class="stat-key">Format</div>
+          </div>
+        </div>
+
+        <a href="https://forms.gle/N1hsMBkAmnxu4zT6A" target="_blank" rel="noopener" class="game-cta">
+          Register Squad <span class="cta-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- RULES -->
+      <div class="game-rules">
+        <div class="rules-heading">Tournament Format</div>
+
+        <div class="bracket-box">
+          <div class="bracket-header">📋 SCHEDULE</div>
+          <div class="bracket-row">
+            <span>DAY 1</span>
+            <span>11:00 AM</span>
+            <span>Group Stage</span>
+          </div>
+          <div class="bracket-row">
+            <span>DAY 1</span>
+            <span>03:00 PM</span>
+            <span>Knockout Round</span>
+          </div>
+          <div class="bracket-row">
+            <span>DAY 2</span>
+            <span>03:00 PM</span>
+            <span>Finals (BO3)</span>
+          </div>
+        </div>
+
+        <div class="rules-heading">Rules &amp; Info</div>
+        <ul class="rules-list">
+          <li>Team of 5 players. 1 substitute allowed (declared before tournament).</li>
+          <li>Mode: Hardpoint (HP) → Search &amp; Destroy (SnD). Map pool: Raid, Highrise, Standoff.</li>
+          <li>Best of 3 in Finals. Best of 1 in all earlier rounds.</li>
+          <li>No banned operators, weapons, or attachments outside official BR ruleset.</li>
+          <li>Ghosting and stream-sniping during live matches will result in DQ.</li>
+          <li>All players must be at controller rank or above to participate.</li>
+        </ul>
+
+        <div class="prize-row">
+          <div class="prize-cell">
+            <div class="prize-rank">1st Place</div>
+            <span class="prize-medal">🥇</span>
+            <div class="prize-amount">₹3500</div>
+          </div>
+          <div class="prize-cell">
+            <div class="prize-rank">2nd Place</div>
+            <span class="prize-medal">🥈</span>
+            <div class="prize-amount">₹1500</div>
+          </div>
+          <div class="prize-cell">
+            <div class="prize-rank">3rd Place</div>
+            <span class="prize-medal">🥉</span>
+            <div class="prize-amount">₹500</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /.game-panel.codm -->
+
+</div><!-- /.games-wrap -->
+
+<!-- ===== GENERAL RULES ===== -->
+<div class="section-wrap">
+  <div class="divider" style="max-width:1200px;margin:0 auto;padding:0 2rem;"></div>
+  <div class="general-section">
+    <div class="section-label">General E-Sports Rules</div>
+    <div class="section-title">Fair Play <span>First</span></div>
+
+    <div class="general-grid">
+
+      <div class="general-card reveal">
+        <span class="gen-icon">📱</span>
+        <div class="gen-title">Device Policy</div>
+        <div class="gen-text">Players must use their own mobile devices. Rooted phones, emulators, and third-party controllers are strictly not allowed. Devices may be checked by organizers at any time.</div>
+      </div>
+
+      <div class="general-card reveal">
+        <span class="gen-icon">🪪</span>
+        <div class="gen-title">Eligibility</div>
+        <div class="gen-text">Open to all students of Ujjain Engineering College with valid student ID. All team members must be currently enrolled students. One player cannot be part of two teams across the same game.</div>
+      </div>
+
+      <div class="general-card reveal">
+        <span class="gen-icon">⏰</span>
+        <div class="gen-title">Reporting Time</div>
+        <div class="gen-text">All players must report at the venue (Computer Lab) at least 15 minutes before their scheduled match. Failure to report on time may result in a walkover for the opposing team.</div>
+      </div>
+
+      <div class="general-card reveal">
+        <span class="gen-icon">🚫</span>
+        <div class="gen-title">Zero Tolerance</div>
+        <div class="gen-text">Hacks, mods, aimbots, wall hacks, or any form of cheating results in permanent disqualification from all E-Sports events. Verbal abuse or unsportsmanlike conduct will also result in DQ.</div>
+      </div>
+
+      <div class="general-card reveal">
+        <span class="gen-icon">⚖️</span>
+        <div class="gen-title">Disputes</div>
+        <div class="gen-text">All decisions made by the tournament organizer are final. Disputes must be raised within 10 minutes of match end. Screenshots/recordings may be submitted as evidence.</div>
+      </div>
+
+      <div class="general-card reveal">
+        <span class="gen-icon">📞</span>
+        <div class="gen-title">Contact Coordinators</div>
+        <div class="gen-text">For queries specific to E-Sports, contact the event coordinators at <strong style="color:var(--yellow)">+91 88394 89859</strong> or reach out at the venue registration desk on Day 1.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VidhYouth</div>
+  <div class="footer-sub">Electrical Engineering Society · Ujjain Engineering College</div>
+  <div class="footer-copy">© 2026 EES UEC · All Rights Reserved · Feel The Surge</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

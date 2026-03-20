@@ -603,7 +603,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Vidh<span>Youth</span></div>
+  <a href="index.html"><div class="nav-logo">Vidh<span>Youth</span></div></a>
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#events">Events</a></li>
@@ -709,7 +709,7 @@
         <div class="card-info">
           <span class="info-pill"><span class="pill-icon">👥</span> Solo / Duo</span>
           <span class="info-pill"><span class="pill-icon">📅</span> Day 1 &amp; 2</span>
-          <span class="info-pill"><span class="pill-icon">🎮</span> BGMI / VALORANT</span>
+          <span class="info-pill"><span class="pill-icon">🎮</span> BGMI / Free Fire / CODM</span>
         </div>
       </div>
       <div class="card-footer">
@@ -785,7 +785,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="reg-btn" onclick="openModal('groovolt')">
+        <button class="reg-btn" onclick="openModal('openMic')">
           Register Now <span class="btn-arrow">→</span>
         </button>
       </div>
@@ -866,8 +866,8 @@
       <div class="modal-note" id="modalNote"></div>
     </div>
     <div class="modal-footer">
-      <a class="modal-reg-btn" id="modalFormBtn" href="#" target="_blank" rel="noopener">
-        ⚡ Open Google Form
+      <a class="modal-reg-btn" id="modalFormBtn" href="#">
+        ⚡ Open Registration Form
       </a>
     </div>
   </div>
@@ -886,11 +886,10 @@ const events = {
     details: [
       { label: 'Team Size',    value: '1 – 4 Members' },
       { label: 'Event Days',   value: 'Day 1 & Day 2' },
-      { label: 'Venue',        value: 'Exhibition Ground' },
-      { label: 'Prize Pool',   value: '₹5,000' },
+      { label: 'Venue',        value: 'Mechanical Ground' }
     ],
     note: 'Bring your own hardware/materials. Power outlets will be provided. Submit abstract at least 3 days before the event.',
-    formUrl: 'https://forms.gle/YOUR_EXHIBITION_FORM_ID',  // ← Replace with actual Google Form URL
+    formUrl: 'https://forms.gle/L5vwrDRvjJsKPca67 ',  // ← Replace with actual Google Form URL
   },
   presentation: {
     icon: '🎙️',
@@ -902,21 +901,21 @@ const events = {
       { label: 'Slot Duration', value: '10 Minutes' },
       { label: 'Venue',        value: 'Seminar Hall' },
     ],
-    note: 'Submit your presentation (PPT/PDF) 24 hours before the event. No topic restrictions within EE domain.',
-    formUrl: 'https://forms.gle/YOUR_PRESENTATION_FORM_ID',  // ← Replace
+    note: 'Submit your presentation (PPT/PDF) before the event. No topic restrictions within EE domain.',
+    formUrl: 'https://forms.gle/JCMnE4aGotCiquyH9',  // ← Replace
   },
   esports: {
     icon: '🎮',
     name: 'E-Sports',
-    desc: 'Compete in high-energy online gaming tournaments. Games include BGMI (Battle Grounds Mobile India) and VALORANT. Form your squad, develop your strategy, and battle to the top of the leaderboard.',
+    desc: 'Compete in high-energy online gaming tournaments. Games include BGMI (Battle Grounds Mobile India); Free Fire and VALORANT. Form your squad, develop your strategy, and battle to the top of the leaderboard.',
     details: [
       { label: 'Team Size',    value: 'Solo or Duo' },
       { label: 'Event Days',   value: 'Day 1 & Day 2' },
-      { label: 'Games',        value: 'BGMI / VALORANT' },
-      { label: 'Venue',        value: 'Computer Lab' },
+      { label: 'Games',        value: 'BGMI, Free Fire, Valorant' },
+      { label: 'Venue',        value: '1st Year Building' },
     ],
     note: 'Bring your own device. Tournament brackets will be shared 1 day before. Report 30 mins before your scheduled time.',
-    formUrl: 'https://forms.gle/YOUR_ESPORTS_FORM_ID',  // ← Replace
+    formUrl: 'esports.html',  // ← Replace
   },
   dance: {
     icon: '💃',
@@ -929,7 +928,7 @@ const events = {
       { label: 'Venue',        value: 'Open Air Stage' },
     ],
     note: 'Submit your audio track (MP3) 2 days in advance. Costumes and props are encouraged. Vulgarity strictly not allowed.',
-    formUrl: 'https://forms.gle/YOUR_DANCE_FORM_ID',  // ← Replace
+    formUrl: 'https://forms.gle/wagQj6fmmen4hKrA9',  // ← Replace
   },
   drama: {
     icon: '🎭',
@@ -942,17 +941,17 @@ const events = {
       { label: 'Venue',        value: 'Central Square / Auditorium' },
     ],
     note: 'Script submission is mandatory 3 days before. Props allowed. No loud music during street play unless pre-approved.',
-    formUrl: 'https://forms.gle/YOUR_DRAMA_FORM_ID',  // ← Replace
+    formUrl: 'https://forms.gle/qSqb6yA9RbrQA4nB6',  // ← Replace
   },
-  groovolt: {
+  openMic: {
     icon: '🎵',
-    name: 'Groovolt — Music',
-    desc: 'Take the stage and perform your original or cover piece for a live audience. Vocals, instruments, DJ sets, or full bands — all are welcome at Groovolt. This is where music meets the surge.',
+    name: 'Open Mic',
+    desc: 'Take the stage and perform your original or cover piece for a live audience. Vocals, instruments, DJ sets, or full bands — all are welcome at VidhYouth. This is where talent meets the surge.',
     details: [
       { label: 'Format',       value: 'Solo / Band' },
       { label: 'Event Days',   value: 'Day 1 & Day 3' },
       { label: 'Duration',     value: '5 – 10 Minutes' },
-      { label: 'Venue',        value: 'Open Air Stage' },
+      { label: 'Venue',        value: 'Mechanical Ground' },
     ],
     note: 'Basic sound system provided. Bring your own instruments if needed. Submit track/backing track in MP3 format in advance.',
     formUrl: 'https://forms.gle/YOUR_GROOVOLT_FORM_ID',  // ← Replace
@@ -969,19 +968,6 @@ const events = {
     ],
     note: 'All rounds are timed (rapid chess). FIDE rules apply. Report 15 minutes before your round or forfeit.',
     formUrl: 'https://forms.gle/YOUR_CHESS_FORM_ID',  // ← Replace
-  },
-  minigames: {
-    icon: '🕹️',
-    name: 'Mini Games',
-    desc: 'A series of fun and creative mini challenges that test quick thinking, speed, and creativity. Events change every round — expect the unexpected. Great energy, zero pressure.',
-    details: [
-      { label: 'Format',       value: 'Solo or Pair' },
-      { label: 'Event Days',   value: 'Day 2 & Day 3' },
-      { label: 'Rounds',       value: 'Multiple' },
-      { label: 'Venue',        value: 'Sports Ground' },
-    ],
-    note: 'Details of mini game activities will be revealed on the spot. Wear comfortable clothes. Participation certificate for all.',
-    formUrl: 'https://forms.gle/YOUR_MINIGAMES_FORM_ID',  // ← Replace
   },
 };
 
